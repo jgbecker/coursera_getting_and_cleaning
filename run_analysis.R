@@ -2,7 +2,7 @@
 # script for tidying the UCI "Human Activity Recognition Using Smartphones Data Set"
 
 # Usage:
-# setwd( [path to the [UCI HAR Dataset directory obtained after unzipping] )
+# setwd( [path to the UCI HAR Dataset directory obtained after unzipping] )
 # source('run_analysis.R')
 
 # Output:

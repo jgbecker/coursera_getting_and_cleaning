@@ -3,7 +3,7 @@
 
 # Usage:
 # setwd( [path to the [UCI HAR Dataset directory obtained after unzipping] )
-# source(run_analysis.R)
+# source('run_analysis.R')
 
 # Output:
 # writes a file named tidy.txt the UCI HAR Dataset directory containing the tidied data

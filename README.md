@@ -27,5 +27,7 @@ The script will then output a file named "tidy.txt" with the tidied data set to 
 
 ## Details
 
-The script performs the following steps:
-1. 
+The script is structured into helper functions, which are explained in the comments in the code.
+These helper functions are wired together by the function
+uci.har.process (). This function is called at the bottom of the file and thus executed as soon as the script
+is `source`d.

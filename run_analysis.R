@@ -122,6 +122,7 @@ uci.har.aggregateBySubjectAndActivity <- function (df) {
 #   Mag is replaced by Magnitude
 #   -mean() is replaced by Mean
 #   -std() is replaced by Std
+#   BodyBody is replaced by Body
 #   afterwards, hyphens are removed
 uci.har.generateCleanVariableName <- function (originalName) {
   s <- originalName
@@ -133,7 +134,7 @@ uci.har.generateCleanVariableName <- function (originalName) {
   s <- sub ('\\-mean\\(\\)', 'Mean', s)
   s <- sub ('\\-std\\(\\)', 'Std', s)
   s <- gsub ('\\-', '', s)
-  s  
+  s <- sub ('BodyBody', 'Body', s)
 }
 
 # main function:

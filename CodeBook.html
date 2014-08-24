@@ -53,26 +53,69 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
-<div id="run_analysis.r" class="section level1">
-<h1>run_analysis.R</h1>
-<p><em>Script for tidying the UCI “Human Activity Recognition Using Smartphones Data Set”</em></p>
-<div id="description" class="section level2">
-<h2>Description</h2>
-<p>The script is intended for tidying the UCI “Human Activity Recognition Using Smartphones Data Set”, which is available at <a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a> . The script creates a single data set with one record for each of the 30 subjects and each of the 6 activities (i.e. a total of 6*30=180 records), obtained by column-wise averaging over all rows for each particular (subject,activity) pair in the original data set. All columns apart from those labelled as “mean” or “standard deviation” in the original data set are removed.</p>
-<p>Consequently, for each record, the generated data set contains mean and standard deviation of the 33 different accelometer and gyroscope measurents.</p>
+<div id="code-book" class="section level1">
+<h1>Code book</h1>
 </div>
-<div id="usage" class="section level2">
-<h2>Usage</h2>
-<p>Get the zip file from the above link and unpack it.</p>
-<p>Then, in R, do:</p>
-<pre><code>setwd( [path to the UCI HAR Dataset directory obtained after unzipping] )
-source('run_analysis.R')</code></pre>
-<p>The script will then output a file named “tidy.txt” with the tidied data set to the UCI HAR Dataset directory.</p>
+<div id="source-data" class="section level1">
+<h1>Source data</h1>
+<p>The script works on the UCI “Human Activity Recognition Using Smartphones Data Set” available from <a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a> . It tidies the data set by doing the transformations explained below. The output is a tidied data set containing 180 rows representing the measurements for each of the 6 activities performed for each of the 30 subjects.</p>
 </div>
-<div id="details" class="section level2">
-<h2>Details</h2>
-<p>The script is structured into helper functions, which are explained in the comments in the code. These helper functions are wired together by the function uci.har.process (). This function is called at the bottom of the file and thus executed as soon as the script is <code>source</code>d.</p>
-</div>
+<div id="variables-in-the-tidied-data-set" class="section level1">
+<h1>Variables in the tidied data set</h1>
+<table border="1px">
+<tr><th>
+Variable
+</th><th>
+Description
+</tr></th>
+<tr><td width="30%">
+Subject
+</td><td>
+subject id (1-30)
+</td></tr>
+<tr><td>
+Activity
+</td><td>
+activity performed, one of WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
+</td></tr>
+<tr><td>
+BodyAcceleration{Mean|Std}{X|Y|Z}
+</td><td></td></tr>
+<tr><td>
+GravityAcceleration{Mean|Std}{X|Y|Z}
+</td><td></td></tr>
+<tr><td>
+BodyAccelerationJerk{Mean|Std}{X|Y|Z}
+</td><td></td></tr>
+<tr><td>
+BodyGyroscope{Mean|Std}{X|Y|Z}
+</td><td></td></tr>
+<tr><td>
+BodyGyroscopeJerk{Mean|Std}{X|Y|Z}
+</td><td></td></tr>
+<tr><td>
+BodyAccelerationMagnitude{Mean|Std}
+</td><td></td></tr>
+<tr><td>
+GravityAccelerationMagnitude{Mean|Std}
+</td><td></td></tr>
+<tr><td>
+BodyAccelerationJerkMagnitude{Mean|Std}
+</td><td></td></tr>
+<tr><td>
+BodyGyroscopeMagnitude{Mean|Std}
+</td><td></td></tr>
+<tr><td>
+BodyGyroscopeJerkMagnitude{Mean|Std}
+</td><td></td></tr>
+</table>
+
+
+
+
+
+
+<p>[43] “FFTBodyAccelerationMeanX” “FFTBodyAccelerationMeanY”<br />[45] “FFTBodyAccelerationMeanZ” “FFTBodyAccelerationStdX”<br />[47] “FFTBodyAccelerationStdY” “FFTBodyAccelerationStdZ”<br />[49] “FFTBodyAccelerationJerkMeanX” “FFTBodyAccelerationJerkMeanY”<br />[51] “FFTBodyAccelerationJerkMeanZ” “FFTBodyAccelerationJerkStdX”<br />[53] “FFTBodyAccelerationJerkStdY” “FFTBodyAccelerationJerkStdZ”<br />[55] “FFTBodyGyroscopeMeanX” “FFTBodyGyroscopeMeanY”<br />[57] “FFTBodyGyroscopeMeanZ” “FFTBodyGyroscopeStdX”<br />[59] “FFTBodyGyroscopeStdY” “FFTBodyGyroscopeStdZ”<br />[61] “FFTBodyAccelerationMagnitudeMean” “FFTBodyAccelerationMagnitudeStd”<br />[63] “FFTBodyBodyAccelerationJerkMagnitudeMean” “FFTBodyBodyAccelerationJerkMagnitudeStd” [65] “FFTBodyBodyGyroscopeMagnitudeMean” “FFTBodyBodyGyroscopeMagnitudeStd”<br />[67] “FFTBodyBodyGyroscopeJerkMagnitudeMean” “FFTBodyBodyGyroscopeJerkMagnitudeStd”</p>
 </div>
 
 

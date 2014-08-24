@@ -23,77 +23,77 @@ library(plyr)
 #    activitiesColumnFileName : path to the file containing the column indicating the activities
 #    subjectColumnFileName : path to the file containing the column indicating the subjects
 uci.har.readAndAssemble <- function (
-	numericDataFileName,
-	columnNamesFileName,
-	activitiesColumnFileName,
-	subjectColumnFileName
+  numericDataFileName,
+  columnNamesFileName,
+  activitiesColumnFileName,
+  subjectColumnFileName
 ) {
-	# read numeric data values
-	x <- read.table (numericDataFileName)
-
+  # read numeric data values
+  x <- read.table (numericDataFileName)
+  
   # read column names for numeric data
-	featuresTbl <- read.table (columnNamesFileName)
-	features <- featuresTbl[,2]
-
+  featuresTbl <- read.table (columnNamesFileName)
+  features <- featuresTbl[,2]
+  
   # set column names
-	colnames(x) <- features
-
+  colnames(x) <- features
+  
   # read column indicating activities
-	y <- read.table (activitiesColumnFileName)
-	activityId <- y[,1]
-
+  y <- read.table (activitiesColumnFileName)
+  activityId <- y[,1]
+  
   # read column indicating subjects
-	s <- read.table (subjectColumnFileName)
-	subject <- s[,1]
-
+  s <- read.table (subjectColumnFileName)
+  subject <- s[,1]
+  
   # return data frame including Subject and ActivityId columns
-	cbind(Subject = subject, ActivityId = activityId, x)
+  cbind(Subject = subject, ActivityId = activityId, x)
 }
 
 # calls uci.har.readAndAssemble for the test data
 # returns a data frame containing the data
 uci.har.readAndAssemble.testDataframe <- function () {
-	uci.har.readAndAssemble (
-		'test/X_test.txt',
-		'features.txt',
-		'test/y_test.txt',
-		'test/subject_test.txt'
-	)
+  uci.har.readAndAssemble (
+    'test/X_test.txt',
+    'features.txt',
+    'test/y_test.txt',
+    'test/subject_test.txt'
+  )
 }
 
 # calls uci.har.readAndAssemble for the training data
 # returns a data frame containing the data
 uci.har.readAndAssemble.trainDataframe <- function () {
-	uci.har.readAndAssemble (
-		'train/X_train.txt',
-		'features.txt',
-		'train/y_train.txt',
-		'train/subject_train.txt'
-	)
+  uci.har.readAndAssemble (
+    'train/X_train.txt',
+    'features.txt',
+    'train/y_train.txt',
+    'train/subject_train.txt'
+  )
 }
 
 # reads both the test and the training data
 # concatenates the two data frames into a single data frame,
 # which is returned
 uci.har.readAndAssemble.intoSingleDataframe <- function () {
-	testDf <- uci.har.readAndAssemble.testDataframe ()
+  testDf <- uci.har.readAndAssemble.testDataframe ()
   trainDf <- uci.har.readAndAssemble.trainDataframe ()
-	rbind (testDf, trainDf)
+  rbind (testDf, trainDf)
 }
 
 # takes raw data frame as a parameter and returns a new data frame
 # containing only the Subject, ActivityId as well as all mean and std deviation columns
 uci.har.extractMeanAndStdCols <- function (df) {
-	meanAndStdColIndices <- grep ('-mean\\(\\)|-std\\(\\)', colnames(df))
-	activityIdColIndex <- grep ('^ActivityId$', colnames(df))
-	subjectColIndex <- grep ('^Subject$', colnames(df))
-	df[ , c(subjectColIndex,activityIdColIndex,meanAndStdColIndices) ]
+  meanAndStdColIndices <- grep ('-mean\\(\\)|-std\\(\\)', colnames(df))
+  activityIdColIndex <- grep ('^ActivityId$', colnames(df))
+  subjectColIndex <- grep ('^Subject$', colnames(df))
+  df[ , c(subjectColIndex,activityIdColIndex,meanAndStdColIndices) ]
 }
 
 # reads table containing the translation activity id to activity (verbal)
 # returns data frame containing this table with columns named "ActivityId" and "Activity"
 uci.har.readActivityLabels <- function () {
-	tbl <- read.table ('activity_labels.txt')
+  tbl <- read.table ('activity_labels.txt')
   colnames (tbl) <- c('ActivityId', 'Activity')
   tbl
 }
